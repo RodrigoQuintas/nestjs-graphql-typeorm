@@ -36,4 +36,10 @@ export class ProfileResolver {
     const profile = await this.profileService.updateProfile(id, data);
     return profile;
   }
+
+  @Mutation(() => Boolean)
+  async deleteProfile(@Args('id') id: string): Promise<boolean> {
+    const hasBeenDeleted = await this.profileService.deleteProfile(id);
+    return hasBeenDeleted;
+  }
 }

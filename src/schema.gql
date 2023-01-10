@@ -9,6 +9,7 @@ input CreateProfileInput {
 
 type Mutation {
   createProfile(data: CreateProfileInput!): Profile!
+  deleteProfile(id: String!): Boolean!
   updateProfile(data: UpdateProfileInput!, id: String!): Profile!
 }
 

@@ -51,4 +51,12 @@ export class ProfileService {
 
     return updatedProfile;
   }
+
+  async deleteProfile(id: string): Promise<boolean> {
+    const profile = await this.findProfileById(id);
+    const deletedProfile = await this.profileRepository.delete(profile);
+    if (deletedProfile) return true;
+
+    return false;
+  }
 }
