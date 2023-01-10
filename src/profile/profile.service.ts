@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Profile } from 'src/entities/profile.entity';
 import { Repository } from 'typeorm';
 import { CreateProfileInput } from './dtos/create-profile.input';
+import { UpdateProfileInput } from './dtos/update-profile.input';
 
 @Injectable()
 export class ProfileService {
@@ -11,9 +12,21 @@ export class ProfileService {
     private profileRepository: Repository<Profile>,
   ) {}
 
-  async listProfiles(): Promise<Profile[]> {
+  async findAllProfiles(): Promise<Profile[]> {
     const profiles = this.profileRepository.find();
     return profiles;
+  }
+
+  async findProfileById(id: string): Promise<Profile> {
+    const profile = await this.profileRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (!profile) {
+      throw new InternalServerErrorException('User not found');
+    }
+    return profile;
   }
 
   async createProfile(data: CreateProfileInput): Promise<Profile> {
@@ -23,5 +36,19 @@ export class ProfileService {
       throw new InternalServerErrorException('Error to create a user');
     }
     return profileSaved;
+  }
+
+  async updateProfile(id: string, data: UpdateProfileInput): Promise<Profile> {
+    const profile = await this.findProfileById(id);
+    await this.profileRepository.update(profile, {
+      ...data,
+    });
+
+    const updatedProfile = this.profileRepository.create({
+      ...profile,
+      ...data,
+    });
+
+    return updatedProfile;
   }
 }
