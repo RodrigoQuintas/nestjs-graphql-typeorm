@@ -25,7 +25,6 @@ import { Profile } from './entities/profile.entity';
       database: process.env.DATABASE_NAME,
       entities: [Profile],
       synchronize: true,
-      schema: process.env.DATABASE_SCHEMA,
     }),
     ProfileModule,
   ],

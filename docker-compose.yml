@@ -1,0 +1,20 @@
+version: '1.0'
+
+services:
+  api:
+    container_name: nestjs-graphql-typeorm-api
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/api
+
+  database:
+    image: postgres:13
+    container_name: nestjs-graphql-typeorm-database
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234567890
+    ports:
+      - "5433:5432"
