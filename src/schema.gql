@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateProfileInput {
+  name: String!
+  resume: String!
+}
+
+type Mutation {
+  createProfile(data: CreateProfileInput!): Profile!
+}
+
+type Profile {
+  id: ID!
+  name: String!
+  resume: String!
+}
+
+type Query {
+  profiles: [Profile!]!
+}

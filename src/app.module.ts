@@ -7,6 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { ProfileModule } from './profile/profile.module';
+import { Profile } from './entities/profile.entity';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -22,7 +23,7 @@ import { ProfileModule } from './profile/profile.module';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [],
+      entities: [Profile],
       synchronize: true,
       schema: process.env.DATABASE_SCHEMA,
     }),
