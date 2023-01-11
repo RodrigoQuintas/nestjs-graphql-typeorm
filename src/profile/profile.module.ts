@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { ProfileResolver } from './profile.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Profile } from 'src/entities/profile.entity';
+import { Profile } from 'src/common/entities/profile.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Profile])],

@@ -1,6 +1,10 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Profile } from 'src/entities/profile.entity';
+import { Profile } from '../common/entities/profile.entity';
 import { Repository } from 'typeorm';
 import { CreateProfileInput } from './dtos/create-profile.input';
 import { UpdateProfileInput } from './dtos/update-profile.input';
@@ -24,7 +28,7 @@ export class ProfileService {
       },
     });
     if (!profile) {
-      throw new InternalServerErrorException('User not found');
+      throw new NotFoundException('User not found');
     }
     return profile;
   }
